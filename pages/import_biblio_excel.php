@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2024-09-24 16:49:08
- * @modify date 2024-09-24 16:49:08
+ * @modify date 2024-09-26 23:02:44
  * @desc 
  * - License : GPL-v3
  */
@@ -24,6 +24,7 @@ require SB.'admin/default/session.inc.php';
 require SIMBIO.'simbio_DB/simbio_dbop.inc.php';
 require SIMBIO.'simbio_GUI/table/simbio_table.inc.php';
 require SIMBIO.'simbio_GUI/form_maker/simbio_form_table_AJAX.inc.php';
+include __DIR__ . '/backup_alert.php';
 
 // privileges checking
 $can_read = utility::havePrivilege('bibliography', 'r');
@@ -203,7 +204,7 @@ if (isset($_POST['doImport'])) {
     <h2><?php echo __('Import Tool'); ?></h2>
     </div>
     <div class="infoBox">
-      <?php echo __('Import for bibliographics data from CSV file. For guide on CSV fields order and format please refer to documentation or visit <a href="http://slims.web.id" target="_blank">Official Website</a>'); ?>
+    Impor data bibliografi dalam format Excel.
       &nbsp;<a href="<?= pluginUrl(['action' => 'download_sample']) ?>" class="s-btn btn btn-secondary notAJAX"><?= __('Download Sample') ?></a>
 	  </div>
 </div>

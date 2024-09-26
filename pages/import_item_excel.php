@@ -3,7 +3,7 @@
  * @author Drajat Hasan
  * @email drajathasan20@gmail.com
  * @create date 2024-09-24 16:49:08
- * @modify date 2024-09-24 16:49:08
+ * @modify date 2024-09-26 23:02:57
  * @desc 
  * - License : GPL-v3
  */
@@ -25,6 +25,7 @@ require SB.'admin/default/session.inc.php';
 require SIMBIO.'simbio_DB/simbio_dbop.inc.php';
 require SIMBIO.'simbio_GUI/table/simbio_table.inc.php';
 require SIMBIO.'simbio_GUI/form_maker/simbio_form_table_AJAX.inc.php';
+include __DIR__ . '/backup_alert.php';
 
 // privileges checking
 $can_read = utility::havePrivilege('bibliography', 'r');
@@ -102,6 +103,8 @@ if (isset($_POST['doImport'])) {
         SQL);
 
         foreach ($sheet->toArray() as $data) {
+            if ($data[0] == 'item_code') continue;
+            
             foreach ($data as $index => $field) {
                 switch ($index) {
                     case 2:
@@ -151,6 +154,7 @@ if (isset($_POST['doImport'])) {
 
             if ($state->rowCount() < 1) {
                 $item_code = $data[0];
+                $data[11] = empty($data[11]) ? 1 : $data[11];
                 $data[4] = is_numeric($data[4]) ? date('Y-m-d', Date::excelToTimestamp($data[4])) : $data[4];
                 $data[8] = is_numeric($data[8]) ? date('Y-m-d', Date::excelToTimestamp($data[8])) : $data[8];
                 $data[15] = is_numeric($data[15]) ?  date('Y-m-d', Date::excelToTimestamp($data[15])) : $data[15];

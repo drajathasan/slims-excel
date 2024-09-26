@@ -30,5 +30,7 @@ if (!function_exists('pluginUrl'))
     }
 }
 
+Plugins::getInstance()->registerMenu('bibliography', 'Biblio Export Excel', __DIR__ . '/pages/export_biblio_excel.php');
+Plugins::getInstance()->registerMenu('bibliography', 'Item Export Excel', __DIR__ . '/pages/export_item_excel.php');
 Plugins::getInstance()->registerMenu('bibliography', 'Biblio Import Excel', __DIR__ . '/pages/import_biblio_excel.php');
 Plugins::getInstance()->registerMenu('bibliography', 'Item Import Excel', __DIR__ . '/pages/import_item_excel.php');
