@@ -1,9 +1,13 @@
 <?php
 use SLiMS\DB;
 
+if (isset($_GET['action']) && $_GET['action'] == 'bypass_backup') {
+    $_SESSION['bypass_backup'] = true;
+}
+
 $backup_log = DB::getInstance()->query('select backup_log_id from backup_log where date(backup_time) = \'' . (date('Y-m-d')) . '\'');
 
-if ($backup_log->rowCount() < 1) {
+if (!isset($_SESSION['bypass_backup']) && $backup_log->rowCount() < 1) {
     $can_read = utility::havePrivilege('system', 'r');
     $can_write = utility::havePrivilege('system', 'w');
 ?>
@@ -25,6 +29,7 @@ if ($backup_log->rowCount() < 1) {
         <?php
         }
         ?>
+        <span class="my-5">Vector illustration take from <a href="https://storyset.com/illustration/warning/rafiki" class="notAJAX" target="_blank">storyset</a></span>
     </div>
 <?php
     exit;
